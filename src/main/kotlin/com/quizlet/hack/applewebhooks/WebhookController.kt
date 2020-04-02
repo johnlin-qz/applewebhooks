@@ -14,7 +14,13 @@ class WebhookController(val webhookService: WebhookService) {
         val notificationType: String = webhookService.handle(json)
         return NotificationTypeDto(notificationType)
     }
-
+/*
+    @PostMapping(name = "/parrot", consumes = ["application/json"], produces = ["application/json"])
+    fun parrot(@RequestBody json: String): NotificationTypeDto {
+        val notificationType: String = webhookService.parrot(json)
+        return NotificationTypeDto(notificationType)
+    }
+*/
     @GetMapping("/renew")
     fun renew(): AppleWebhook? {
         return webhookService.renew()
