@@ -5,6 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 	kotlin("jvm") version "1.2.71"
 	kotlin("plugin.spring") version "1.2.71"
+	kotlin("plugin.jpa") version "1.2.71"
 	kotlin("kapt") version "1.2.71"
 }
 
@@ -23,6 +24,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("com.squareup.moshi:moshi:1.8.0")
 	kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.cloud:spring-cloud-gcp-starter-sql-mysql:1.2.2.RELEASE")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
@@ -36,5 +39,6 @@ tasks.withType<KotlinCompile> {
 tasks {
 	val bootRun by getting(org.springframework.boot.gradle.tasks.run.BootRun::class) {
 		jvmArgs=listOf("-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=32323")
+		environment("GOOGLE_APPLICATION_CREDENTIALS", "/Users/johnlin/Downloads/applewebhooks/quizlet-development-dfc5b9305547.json")
 	}
 }

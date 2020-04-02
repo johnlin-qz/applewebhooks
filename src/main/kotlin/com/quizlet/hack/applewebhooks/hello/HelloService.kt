@@ -1,4 +1,4 @@
-package com.quizlet.hack.applewebhooks
+package com.quizlet.hack.applewebhooks.hello
 
 import org.springframework.stereotype.Service
 
