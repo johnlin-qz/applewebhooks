@@ -7,7 +7,8 @@ import javax.persistence.*
 @Table(name = "AppleManagedSubscription",
         indexes = [
                 Index(name="providerSpecifiedUserId_Idx", columnList="provider_specified_user_id"),
-                Index(name="userId_Idx", columnList="user_id")
+                Index(name="userId_Idx", columnList="user_id"),
+                Index(name="subscriptionCycle_Unique_Idx", columnList="provider_specified_user_id, order_id", unique = true)
         ])
 class AppleManagedSubscription(
         @Column(name = "provider_specified_user_id", length = 16)
