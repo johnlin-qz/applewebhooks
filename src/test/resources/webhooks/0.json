@@ -1,0 +1,4 @@
+[
+  { "name" : "HDD", "capacityInGb" : 512 },
+  { "name" : "RAM", "capacityInGb" : 16 }
+]
