@@ -4,11 +4,14 @@ FROM maven:3.5-jdk-8-alpine as builder
 
 # Copy local code to the container image.
 WORKDIR /app
-COPY pom.xml .
+COPY gradlew .
+COPY gradle ./gradle
+COPY build.gradle.kts .
+COPY settings.gradle.kts .
 COPY src ./src
 
 # Build a release artifact.
-RUN mvn package -DskipTests
+RUN ./gradlew build -x test
 
 # Use AdoptOpenJDK for base image.
 # It's important to use OpenJDK 8u191 or above that has container support enabled.
@@ -17,7 +20,7 @@ RUN mvn package -DskipTests
 FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /app/target/helloworld-*.jar /helloworld.jar
+COPY --from=builder /app/build/libs/applewebhooks-*.jar /applewebhooks.jar
 
 # Run the web service on container startup.
-CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/helloworld.jar"]
+CMD ["java","-Djava.security.egd=file:/dev/./urandom","-Dserver.port=${PORT}","-jar","/applewebhooks.jar"]
