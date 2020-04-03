@@ -17,8 +17,16 @@ repositories {
 	mavenCentral()
 }
 
+val developmentOnly by configurations.creating
+configurations {
+	runtimeClasspath {
+		extendsFrom(developmentOnly)
+	}
+}
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -26,6 +34,7 @@ dependencies {
 	kapt("com.squareup.moshi:moshi-kotlin-codegen:1.8.0")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.cloud:spring-cloud-gcp-starter-sql-mysql:1.2.2.RELEASE")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+<body>
+    <div th:switch="${subs}">
+        <h2 th:case="null">No Subscriptions</h2>
+        <div th:case="*">
+            <h2>Subscriptions</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>Provider Specified User Id</th>
+                    <th>Order Id</th>
+                    <th>Product Id</th>
+                    <th>Start Time</th>
+                    <th>Expiration Time</th>
+                    <th>Last Modified</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sub : ${subs}">
+                    <td th:text="${sub.userId}"></td>
+                    <td th:text="${sub.providerSpecifiedUserId}"></td>
+                    <td th:text="${sub.orderId}"></td>
+                    <td th:text="${sub.productId}"></td>
+                    <td th:text="${sub.startTime}"></td>
+                    <td th:text="${sub.expirationTime}"></td>
+                    <td th:text="${sub.lastModified}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
